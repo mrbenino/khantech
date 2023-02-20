@@ -14,19 +14,20 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        return ReviewResource::collection(Review::all());
+        $reviews = Review::paginate(10);
+        return response()->json($reviews);
     }
 
     public function store(Request $request)
     {
         if (!$request->hasFile('file')) {
-            return response()->json(['error' => 'Файл не был отправлен'], 422);
+            return response()->json(['error' => 'The file was not sent'], 422);
         }
 
         $path = $request->file('file')->getRealPath();
         Excel::import(new ReviewsImport, $path, null, \Maatwebsite\Excel\Excel::CSV);
 
-        return response()->json(['success' => 'Файл успешно загружен']);
+        return response()->json(['success' => 'File uploaded successfully']);
     }
 
     public function destroy()
