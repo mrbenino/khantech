@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/review', [\App\Http\Controllers\Api\ReviewController::class, 'index']);
+
+Route::post('/review', [\App\Http\Controllers\Api\ReviewController::class, 'store']);
+
+Route::delete('/review', [\App\Http\Controllers\Api\ReviewController::class, 'destroy']);
