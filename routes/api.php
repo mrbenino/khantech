@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/review', [\App\Http\Controllers\Api\ReviewController::class, 'index']);
+Route::get('/review', [\App\Http\Controllers\Api\ReviewController::class, 'index'])->name('reviews.index');
 
 Route::post('/review', [\App\Http\Controllers\Api\ReviewController::class, 'store']);
 
